@@ -2,21 +2,22 @@ from rest_framework import serializers
 from .models import Habit
 from datetime import timedelta
 
+
 class HabitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Habit
-        fields = '__all__'
-        read_only_fields = ('user',)
+        fields = "__all__"
+        read_only_fields = ("user",)
 
     def validate(self, data):
         """
         Валидация всех полей (аналог метода clean в модели).
         """
-        reward = data.get('reward')
-        related_habit = data.get('related_habit')
-        is_pleasant = data.get('is_pleasant')
-        duration = data.get('duration')
-        periodicity = data.get('periodicity')
+        reward = data.get("reward")
+        related_habit = data.get("related_habit")
+        is_pleasant = data.get("is_pleasant")
+        duration = data.get("duration")
+        periodicity = data.get("periodicity")
 
         if reward and related_habit:
             raise serializers.ValidationError(
